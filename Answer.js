@@ -18,23 +18,22 @@ var $ = function (selector) {
         getClass(words[i]);
       } else if(validCSS.indexOf(words[i]) > -1) {
         getCSS(words[i]);
+      } else if(words[i] === ""){
       } else {
-        console.log("Nothing found");
+        console.log("No element was found");
       };
     };
   };
 
-  // Removes items from the array if they are not valid according to this word.
+  // Removes items from the array if they are not valid according to the word.
   var deleter = function(word) {
     for(var i = elements.length - 1; i >= 0; i--) {
       if(word.charAt(0) === "#"){
-        deleteByID(elements[i], word)
+        deleteByID(elements[i], word);
       } else if(word.charAt(0) === ".") {
-        deleteByClass(elements[i], word)
+        deleteByClass(elements[i], word);
       } else if(validCSS.indexOf(word) > -1) {
-        deleteByCSS(elements[i], word)
-      } else {
-        console.log("Nothing");
+        deleteByCSS(elements[i], word);
       };
     };
   };
@@ -61,18 +60,26 @@ var $ = function (selector) {
   };
 
   var getClass = function(className) {
-    var classes = document.getElementsByClassName(className.substring(1));
-    for (var i = classes.length - 1; i >= 0; i--) {
-      if(elements.indexOf(classes[i]) <= -1) {
-        elements.push(classes[i]);        
+    if(document.getElementsByClassName(className.substring(1)) !== null) {
+      var classes = document.getElementsByClassName(className.substring(1));
+      for (var i = classes.length - 1; i >= 0; i--) {
+        if(elements.indexOf(classes[i]) <= -1) {
+          elements.push(classes[i]);
+        };
       };
+    } else {
+      console.log("That class wasn't found")
     };
   };
 
   var getId = function(id) {
-    element = (document.getElementById(id.substring(1)))
-    if(elements.indexOf(element) <= -1) {
-      elements.push(element);
+    if(document.getElementById(id.substring(1)) !== null) {
+      element = (document.getElementById(id.substring(1)))
+      if(elements.indexOf(element) <= -1) {
+        elements.push(element);
+      };
+    } else {
+      console.log("That ID wasn't found")
     };
   };
 
