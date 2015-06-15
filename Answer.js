@@ -1,7 +1,7 @@
 var $ = function (selector) {
   var elements = [];
   var validCSS = ["div", "input", "img"];
-  words = [];
+  var words = [];
 
   // Splits id's and classes away from each other, so they can be dealt with separately.
   var parser = function(selector) {
@@ -21,10 +21,10 @@ var $ = function (selector) {
       } else {
         console.log("Nothing found");
       };
-      deleter(words[i]);
     };
   };
 
+  // Removes items from the array if they are not valid according to this word.
   var deleter = function(word) {
     for(var i = elements.length - 1; i >= 0; i--) {
       if(word.charAt(0) === "#"){
@@ -38,13 +38,6 @@ var $ = function (selector) {
       };
     };
   };
-
-  // Either get rid of this, or remove more functionality into it
-  // var culler = function(word) {
-  //   for(var i = elements.length - 1; i >= 0; i--) {
-  //     deleter(elements[i], word);
-  //   };
-  // };
 
   // Helpers //
 
@@ -93,9 +86,9 @@ var $ = function (selector) {
   };
 
   parser(selector);
-
-  // Required as for some reason the iterator cuts out on the last run through.
-  deleter(words[words.length - 1]);
+  for (var i = words.length - 1; i >= 0; i--) {
+    deleter(words[i])
+  };
 
   return elements;
 };
