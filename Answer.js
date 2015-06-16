@@ -13,11 +13,11 @@ var $ = function (selector) {
   var adder = function() {
     for(var i = words.length - 1; i >= 0; i--) {
       if(words[i].charAt(0) === "#"){
-        getId(words[i]);
+        addId(words[i]);
       } else if(words[i].charAt(0) === ".") {
-        getClass(words[i]);
+        addClass(words[i]);
       } else if(validCSS.indexOf(words[i]) > -1) {
-        getCSS(words[i]);
+        addCSS(words[i]);
       } else if(words[i] === ""){
       } else {
         console.log("No element was found");
@@ -59,7 +59,7 @@ var $ = function (selector) {
     };
   };
 
-  var getClass = function(className) {
+  var addClass = function(className) {
     if(document.getElementsByClassName(className.substring(1)) !== null) {
       var classes = document.getElementsByClassName(className.substring(1));
       for (var i = classes.length - 1; i >= 0; i--) {
@@ -68,33 +68,33 @@ var $ = function (selector) {
         };
       };
     } else {
-      console.log("That class wasn't found")
+      console.log("That class wasn't found");
     };
   };
 
-  var getId = function(id) {
+  var addId = function(id) {
     if(document.getElementById(id.substring(1)) !== null) {
-      element = (document.getElementById(id.substring(1)))
+      element = (document.getElementById(id.substring(1)));
       if(elements.indexOf(element) <= -1) {
         elements.push(element);
       };
     } else {
-      console.log("That ID wasn't found")
+      console.log("That ID wasn't found");
     };
   };
 
-  var getCSS = function(css) {
+  var addCSS = function(css) {
     var items = document.getElementsByTagName(css);
     for (var i = items.length - 1; i >= 0; i--) {
       if(elements.indexOf(items[i]) <= -1) {
         elements.push(items[i]);
       };
-    };   
+    };
   };
 
   parser(selector);
   for (var i = words.length - 1; i >= 0; i--) {
-    deleter(words[i])
+    deleter(words[i]);
   };
 
   return elements;
