@@ -9,7 +9,7 @@ var $ = function (selector) {
     adder();
   };
 
-  // Applies functions to each array item, based on whether they are ids, classes or whatever.
+  // Applies functions to each array item, based on whether they are ids, classes or CSS.
   var adder = function() {
     for(var i = words.length - 1; i >= 0; i--) {
       if(words[i].charAt(0) === "#"){
